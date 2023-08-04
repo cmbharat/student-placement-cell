@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+
+    Rendered from ejs view
+<ul>
+    <%for (let student of student_list){%>
+                <li>
+               <%= student.name%>
+            </li>
+             <%}%>   
+</ul>
+
+<form action="create-student" method="post">
+<input type="text" name="name" id="name">
+<input type="number" name="phone" id="phone">
+<button type="submit">Add Student</button>
+</form>
+
+</body>
+</html>
