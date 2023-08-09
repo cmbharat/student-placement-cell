@@ -1,0 +1,10 @@
+body{
+    /* text-align: center; */
+    margin:0
+}
+
+#page-heading{
+    text-align:center;
+    margin-top:25px;
+    color: gray;
+}
