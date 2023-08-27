@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/home.css">
 </head>
+
 <body>
 
     <h1 id="page-heading">
         <i class="fas fa-address-book"></i>
-        Contact List</h1>
+        Contact List
+    </h1>
     <div>
-<ul>
-    <%for (let student of student_list){%>
+        <ul>
+            <%for (let student of student_list){%>
                 <li>
-                    <p><%= student.name%></p>
-                    <p><%= student.phone%></p>
+                    <p>
+                        <%= student.name%>
+                    </p>
+                    <p>
+                        <%= student.phone%>
+                    </p>
                     <div class="delete-button">
                         <!-- <a href="/delete-student/<%= student.age%>"> -->
-                            <a href="/delete-student/?phone=<%= student.phone%>&name=<%= student.name%>">
+                        <a href="/delete-student/?id=<%= student._id%>">
                             <i class="fas fa-window-close">
-                                
+
                             </i>
                         </a>
                     </div>
-            </li>
-             <%}%>   
-</ul>
-</div>
-<form action="create-student" method="post">
-<input type="text" name="name" id="name">
-<input type="text" name="phone" id="phone">
-<button type="submit">Add Student</button>
-</form>
-<script type="text/javascript" src="/js/home.js"></script>
+                </li>
+                <%}%>
+        </ul>
+    </div>
+    <form action="create-student" method="post">
+        <input type="text" name="name" id="name">
+        <input type="text" name="phone" id="phone">
+        <button type="submit">Add Student</button>
+    </form>
+    <script type="text/javascript" src="/js/home.js"></script>
 </body>
+
 </html>

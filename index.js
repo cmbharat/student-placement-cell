@@ -2,17 +2,20 @@ const express = require("express");
 const port = 8000;
 const path = require("path");
 const db = require("./config/mongoose");
-const Contact = require("./models/student");
+const Student = require("./models/student");
+const expressLayouts = require("express-ejs-layouts");
 
 const app = express();
 
-var studentList = [
-  { name: "bharat", phone: "8151007904" },
-  { name: "sfsfc", phone: "8446413134" },
-  { name: "sads", phone: "4478889956" },
-  { name: "adewfgd", phone: "9785454454" },
-];
+app.use(express.static("./assets"));
+app.use(expressLayouts);
 
+//extract style and scripts from sub pages into the layout
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true);
+
+//use express router
+app.use("/", require("./routes"));
 const bodyParser = require("body-parser");
 
 // app.use((req, res, next) => {
@@ -36,16 +39,24 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("assets"));
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  const data = await Student.find({});
+
   return res.render("home", {
     title: "Landing Page",
-    student_list: studentList,
+    student_list: data,
   });
 });
 
 app.get("/practice", (req, res) => {
   return res.render("practice", {
     title: "practice Page",
+  });
+});
+
+app.get("/test", (req, res) => {
+  return res.render("user_profile", {
+    title: "user profile",
   });
 });
 
@@ -56,7 +67,7 @@ app.post("/create-student", async function (req, res) {
   //     phone: req.body.phone,
   //   });
 
-  const newStudent = await Contact.create({
+  const newStudent = await Student.create({
     name: req.body.name,
     phone: req.body.phone,
     // },
@@ -70,7 +81,7 @@ app.post("/create-student", async function (req, res) {
     //   res.redirect("/");
   });
 
-  console.log("newStudent===>", newStudent);
+  // console.log("newStudent===>", newStudent);
 
   res.redirect("/");
 });
@@ -83,13 +94,19 @@ app.post("/create-student", async function (req, res) {
 // });
 
 /*Query params*/
-app.get("/delete-student/", function (req, res) {
+app.get("/delete-student/", async function (req, res) {
   //   let age = req.params.age;
-  console.log(req.query);
-  let studentIndex = studentList.findIndex(
-    (student) => student.phone == req.query.phone
-  );
-  if (studentIndex != -1) studentList.splice(studentIndex, 1);
+  // console.log(req.query);
+  // let studentIndex = studentList.findIndex(
+  //   (student) => student.phone == req.query.id
+  // );
+  let id = req.query.id;
+  console.log(id);
+  let studentIndex = await Student.findByIdAndDelete(id);
+  if ((studentIndex = -1)) {
+    console.log(studentIndex);
+    return;
+  }
   res.redirect("/");
 });
 
