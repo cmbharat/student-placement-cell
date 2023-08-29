@@ -39,52 +39,59 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("assets"));
 
-app.get("/", async (req, res) => {
-  const data = await Student.find({});
+// app.get("/", async (req, res) => {
+//   const data = await Student.find({});
 
-  return res.render("home", {
-    title: "Landing Page",
-    student_list: data,
-  });
-});
+//   return res.render("home", {
+//     title: "Landing Page",
+//     student_list: data,
+//   });
+// });
 
-app.get("/practice", (req, res) => {
-  return res.render("practice", {
-    title: "practice Page",
-  });
-});
+// app.get("/login", async (req, res) => {
+//   return res.render("login", {
+//     title: "Login Page",
+//     // message: "loginMessage",
+//   });
+// });
 
-app.get("/test", (req, res) => {
-  return res.render("user_profile", {
-    title: "user profile",
-  });
-});
+// app.get("/practice", (req, res) => {
+//   return res.render("practice", {
+//     title: "practice Page",
+//   });
+// });
 
-app.post("/create-student", async function (req, res) {
-  //   console.log(req.body);
-  //   studentList.push({
-  //     name: req.body.name,
-  //     phone: req.body.phone,
-  //   });
+// app.get("/test", (req, res) => {
+//   return res.render("user_profile", {
+//     title: "user profile",
+//   });
+// });
 
-  const newStudent = await Student.create({
-    name: req.body.name,
-    phone: req.body.phone,
-    // },
-    // function (err, newStudent) {
-    //   if (err) {
-    //     console.log("error in creating a contacts");
-    //     return;
-    //   }
-    //   console.log("newStudent===>", newStudent);
+// app.post("/create-student", async function (req, res) {
+//   console.log(req.body);
+//   studentList.push({
+//     name: req.body.name,
+//     phone: req.body.phone,
+//   });
 
-    //   res.redirect("/");
-  });
+// const newStudent = await Student.create({
+//   name: req.body.name,
+//   phone: req.body.phone,
+// },
+// function (err, newStudent) {
+//   if (err) {
+//     console.log("error in creating a contacts");
+//     return;
+//   }
+//   console.log("newStudent===>", newStudent);
 
-  // console.log("newStudent===>", newStudent);
+//   res.redirect("/");
+// });
 
-  res.redirect("/");
-});
+// console.log("newStudent===>", newStudent);
+
+//   res.redirect("/");
+// });
 
 /*String params*/
 // app.get("/delete-student/:age", function (req, res) {
@@ -94,21 +101,21 @@ app.post("/create-student", async function (req, res) {
 // });
 
 /*Query params*/
-app.get("/delete-student/", async function (req, res) {
-  //   let age = req.params.age;
-  // console.log(req.query);
-  // let studentIndex = studentList.findIndex(
-  //   (student) => student.phone == req.query.id
-  // );
-  let id = req.query.id;
-  console.log(id);
-  let studentIndex = await Student.findByIdAndDelete(id);
-  if ((studentIndex = -1)) {
-    console.log(studentIndex);
-    return;
-  }
-  res.redirect("/");
-});
+// app.get("/delete-student/", async function (req, res) {
+//   //   let age = req.params.age;
+//   // console.log(req.query);
+//   // let studentIndex = studentList.findIndex(
+//   //   (student) => student.phone == req.query.id
+//   // );
+//   let id = req.query.id;
+//   console.log(id);
+//   let studentIndex = await Student.findByIdAndDelete(id);
+//   if ((studentIndex = -1)) {
+//     console.log(studentIndex);
+//     return;
+//   }
+//   res.redirect("/");
+// });
 
 app.listen(port, (err) => {
   if (err) {
