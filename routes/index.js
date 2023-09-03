@@ -5,12 +5,8 @@ const homeController = require("../controllers/home_controller");
 console.log("router loaded");
 
 router.get("/", homeController.home);
-
-router.get("/login", function (req, res) {
-  res.render("login", {
-    title: "Login Page",
-    message: "loginMessage",
-  });
-});
+router.get("/student-form", homeController.studentForm);
+router.post("/create-student", homeController.createStudent);
+router.use("/users", require("./users"));
 
 module.exports = router;

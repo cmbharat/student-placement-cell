@@ -1,11 +1,21 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const port = 8000;
 const path = require("path");
 const db = require("./config/mongoose");
-const Student = require("./models/student");
 const expressLayouts = require("express-ejs-layouts");
 
 const app = express();
+const bodyParser = require("body-parser");
+
+// app.use((req, res, next) => {
+//   console.log("midddle1 ware called");
+//   next();
+// });
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// app.use(express.urlencoded());
+app.use(cookieParser());
 
 app.use(express.static("./assets"));
 app.use(expressLayouts);
@@ -16,14 +26,6 @@ app.set("layout extractScripts", true);
 
 //use express router
 app.use("/", require("./routes"));
-const bodyParser = require("body-parser");
-
-// app.use((req, res, next) => {
-//   console.log("midddle1 ware called");
-//   next();
-// });
-app.use(bodyParser.urlencoded({ extended: false }));
-
 // app.use((req, res, next) => {
 //   console.log("midddle2 ware called");
 //   next();
@@ -65,32 +67,6 @@ app.use(express.static("assets"));
 //   return res.render("user_profile", {
 //     title: "user profile",
 //   });
-// });
-
-// app.post("/create-student", async function (req, res) {
-//   console.log(req.body);
-//   studentList.push({
-//     name: req.body.name,
-//     phone: req.body.phone,
-//   });
-
-// const newStudent = await Student.create({
-//   name: req.body.name,
-//   phone: req.body.phone,
-// },
-// function (err, newStudent) {
-//   if (err) {
-//     console.log("error in creating a contacts");
-//     return;
-//   }
-//   console.log("newStudent===>", newStudent);
-
-//   res.redirect("/");
-// });
-
-// console.log("newStudent===>", newStudent);
-
-//   res.redirect("/");
 // });
 
 /*String params*/
