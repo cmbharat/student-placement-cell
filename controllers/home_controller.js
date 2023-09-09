@@ -12,6 +12,18 @@ module.exports.studentForm = function (req, res) {
     title: "Create Student",
   });
 };
+
+module.exports.studentInfo = function (req, res) {
+  return res.render("student_info", {
+    title: "Student Info",
+  });
+};
+module.exports.interviewInfo = function (req, res) {
+  return res.render("interview_info", {
+    title: "Interviews Info",
+  });
+};
+
 module.exports.createStudent = async function (req, res) {
   const newStudent = await Student.create({
     name: req.body.name,

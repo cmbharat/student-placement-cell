@@ -10,6 +10,11 @@ module.exports.signup = function (req, res) {
     title: "Sign Up",
   });
 };
+module.exports.userInfo = function (req, res) {
+  return res.render("user_profile", {
+    title: "User Profile",
+  });
+};
 module.exports.create = async function (req, res) {
   if (req.body.password != req.body.confirm_password) {
     return res.redirect("back");
