@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+body {
+    font-family: "Poppins", sans-serif;
+    color: #444444;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.section-company {
+    padding: 80px 0 54px;
+}
+
+.section-company .header {
+    margin-bottom: 50px;
+}
+
+.section-company .header h3 {
+    font-size: 1rem;
+    color: #fe302f;
+    font-weight: 500;
+}
+
+.section-company .header h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #444444;
+}
+
+.section-company .single-company {
+    margin-bottom: 26px;
+}
+
+.section-company .single-company .part-1 {
+    position: relative;
+    height: 290px;
+    max-height: 290px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.section-company .single-company .part-1::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: all 0.3s;
+}
+
+.section-company .single-company:hover .part-1::before {
+    transform: scale(1.2, 1.2) rotate(5deg);
+}
+
+.section-company #company-1 .part-1::before {
+    background: url("/images/company.jpg") no-repeat center;
+    background-size: cover;
+    transition: all 0.3s;
+}
+
+.section-company .single-company .part-1 ul {
+    position: absolute;
+    bottom: -41px;
+    left: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    transition: bottom 0.5s, opacity 0.5s;
+}
+
+.section-company .single-company:hover .part-1 ul {
+    bottom: 30px;
+    opacity: 1;
+}
+
+.section-company .single-company .part-1 ul li {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.section-company .single-company .part-1 ul li a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #ffffff;
+    color: #444444;
+    text-align: center;
+    box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
+    transition: color 0.2s;
+}
+
+.section-company .single-company .part-1 ul li a:hover {
+    color: #fe302f;
+}
+
+.section-company .single-company .part-2 .company-title {
+    font-size: 1rem;
+}
+
+.section-company .single-company .part-2 h4 {
+    display: inline-block;
+    font-size: 1rem;
+}

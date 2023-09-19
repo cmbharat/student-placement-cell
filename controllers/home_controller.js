@@ -25,9 +25,6 @@ module.exports.interviewInfo = function (req, res) {
 };
 
 module.exports.createStudent = async function (req, res) {
-  const newStudent = await Student.create({
-    name: req.body.name,
-    phone: req.body.phone,
-  });
+  const newStudent = await Student.create(req.body);
   res.redirect("/");
 };

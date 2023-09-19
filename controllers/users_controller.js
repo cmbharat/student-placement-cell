@@ -1,20 +1,45 @@
 const User = require("../models/user");
 
 module.exports.signin = function (req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("sign_in", {
     title: "Sign In",
   });
 };
 module.exports.signup = function (req, res) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("sign_up", {
     title: "Sign Up",
   });
 };
-module.exports.userInfo = function (req, res) {
+// module.exports.userInfo = function (req, res) {
+//   return res.render("user_profile", {
+//     title: "User Profile",
+//   });
+// };
+
+module.exports.profile = async function (req, res) {
+  // console.log("inside profile");
+  // if (req.cookies.codeial) {
+  //   var user = await User.findById(req.cookies.codeial);
+  //   // console.log("req.cookies.user_id=======>", req.cookies.user_id);
+  //   // console.log("user====", user.name);
+  //   if (user) {
   return res.render("user_profile", {
     title: "User Profile",
+    // user: user,
   });
+  // }
+  //   return res.redirect("/users/signin");
+  // } else {
+  //   return res.redirect("/users/signin");
+  // }
 };
+
 module.exports.create = async function (req, res) {
   if (req.body.password != req.body.confirm_password) {
     return res.redirect("back");
@@ -24,31 +49,25 @@ module.exports.create = async function (req, res) {
 
   if (!user) {
     const newUser = await User.create(req.body);
-    console.log("user new");
     return res.redirect("/users/signin");
   } else {
-    console.log("user existing");
     return res.redirect("back");
   }
-  // User.findOne(
-  //   {
-  //     email: req.body.email,
-  //   },
-  //   (err, user) => {
-  //     if (err) {
-  //       console.log("error in finding the user ", user);
-  //       return;
-  //     }
-  //     // when user is not found
-  //     if (!user) {
-  //       User.create(req.body, function (err, user) {
-  //         if (err) {
-  //           console.log("error in creating user while signing up");
-  //           return;
-  //         }
-  //         return res.redirect("/users/signin");
-  //       });
-  //     }
-  //   }
-  // );
+};
+
+//sign in and create a session for the user
+module.exports.createSession = function (req, res) {
+  return res.redirect("/");
+};
+
+//sign out
+module.exports.destroySession = function (req, res, next) {
+  //function provided by passport
+  req.logout(function (err) {
+    if (err) {
+      console.log("erorr===", err);
+      return next(err);
+    } else res.redirect("/users/signin");
+  });
+  // return res.redirect("/users/signin");
 };

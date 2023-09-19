@@ -1,6 +1,60 @@
-<form action="create-student" method="post">
-    <input type="text" name="name" id="name">
-    <input type="text" name="phone" id="phone">
-    <button type="submit">Add Student</button>
-</form>
+<div class="container-fluid">
 
+    <form action="create-student" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                
+                    <label for="name">
+                        Student Name
+                    </label>
+                    <input type="text" class="form-control" id="name" name="name" />
+                </div>
+                <div class="form-group">
+
+                    <label for="batch">
+                        Batch
+                    </label>
+                    <input type="text" class="form-control" id="batch" name="batch" />
+                </div>
+                <div class="form-group">
+
+                    <label for="college">
+                        College
+                    </label>
+                    <input type="text" class="form-control" id="college" name="college" />
+                </div>
+                <div class="form-group">
+
+                    <label>Status</label><br>
+                      <input type="radio" id="placed" name="status" value="placed">
+                      <label for="placed">Placed</label>
+                      <input type="radio" id="not_placed" name="status" value="not_placed">
+                      <label for="not_placed">Not Placed</label><br>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="dsa_score">DSA Score</label>
+                    <input type="number" name="dsa_score" id="dsa_score" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="webdev_score">Web Dev Score</label>
+                    <input type="number" name="webdev_score" id="webdev_score" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="react_score">React Score</label>
+                    <input type="number" name="react_score" id="react_score" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <button type="submit" class="btn btn-success">
+                    Add Student
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

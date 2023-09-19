@@ -8,7 +8,7 @@ router.get("/", homeController.home);
 router.get("/student-form", homeController.studentForm);
 router.post("/create-student", homeController.createStudent);
 router.use("/users", require("./users"));
-router.use("/interviews", homeController.interviewInfo);
+router.use("/company", require("./company"));
 
 router.use("/studentinfo", homeController.studentInfo);
 module.exports = router;

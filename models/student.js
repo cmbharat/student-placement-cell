@@ -1,18 +1,68 @@
 const mongoose = require("mongoose");
 
-const studentSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const studentSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: [3, "Name must be at least 3 Characters Long ❌"],
+    },
+    batch: {
+      type: String,
+      required: true,
+    },
+    college: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 1,
+    },
+    Status: {
+      type: String,
+      default: "not placed",
+      trim: true,
+      lowercase: true,
+      enum: ["placed", "not placed"],
+    },
+    dsa_score: {
+      type: Number,
+      required: true,
+    },
+    webdev_score: {
+      type: Number,
+      required: true,
+    },
+    react_score: {
+      type: Number,
+      required: true,
+    },
+
+    interviews: [
+      {
+        company: {
+          type: String,
+        },
+        date: {
+          type: String,
+        },
+        result: {
+          type: String,
+          enum: [
+            "On Hold",
+            "Selected",
+            "Pending",
+            "Not Selected",
+            "Did not Attempt",
+          ],
+        },
+      },
+    ],
   },
-  phone: {
-    type: String,
-    required: true,
-  },
-  id: {
-    type: String,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Student = mongoose.model("Student", studentSchema);
 
