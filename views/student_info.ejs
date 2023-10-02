@@ -1,0 +1,60 @@
+<div class="container-fluid">
+
+    <form action="/student/update-student" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                 <input type="text" class="form-control" id="id" name="id" hidden value=<%=studentData.id %> />
+                    <label for="name">
+                        Student Name
+                    </label>
+                    <input type="text" class="form-control" id="name" name="name" value='<%= studentData.name %>' />
+                </div>
+                <div class="form-group">
+
+                    <label for="batch">
+                        Batch
+                    </label>
+                    <input type="text" class="form-control" id="batch" name="batch" value='<%= studentData.batch %>' />
+                </div>
+                <div class="form-group">
+
+                    <label for="college">
+                        College
+                    </label>
+                    <input type="text" class="form-control" id="college" name="college" value='<%= studentData.college %>' />
+                </div>
+                <div class="form-group">
+
+                    <label>Status</label><br>
+                      <input type="radio" id="placed" name="status" value="placed" <%= studentData.status === 'placed' ? "checked" : ""%> >
+                      <label for="placed">Placed</label>
+                      <input type="radio" id="not_placed" name="status" value="not_placed" <%= studentData.status === 'not placed' ? "checked" : ""%>>
+                      <label for="not_placed">Not Placed</label><br>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="dsa_score">DSA Score</label>
+                    <input type="number" name="dsa_score" id="dsa_score" class="form-control" value='<%= studentData.dsa_score %>' >
+                </div>
+                <div class="form-group">
+                    <label for="webdev_score">Web Dev Score</label>
+                    <input type="number" name="webdev_score" id="webdev_score" class="form-control" value='<%= studentData.webdev_score %>' >
+                </div>
+                <div class="form-group">
+                    <label for="react_score">React Score</label>
+                    <input type="number" name="react_score" id="react_score" class="form-control" value='<%= studentData.react_score %>'>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <button type="submit" class="btn btn-success">
+                    Update Details
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

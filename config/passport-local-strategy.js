@@ -33,7 +33,7 @@ passport.serializeUser((user, done) => {
 //deserializing the user from the key in the cookies
 passport.deserializeUser(async (id, done) => {
   const user = await User.findById(id);
-  console.log("user==== in deserial===>", user);
+  // console.log("user==== in deserial===>", user);
   if (user) {
     return done(null, user);
   }
@@ -52,7 +52,7 @@ passport.checkAuthentication = function (req, res, next) {
 };
 
 passport.setAuthenticatedUser = function (req, res, next) {
-  console.log("inside setAuthenicatedUser");
+  // console.log("inside setAuthenicatedUser");
   if (req.isAuthenticated()) {
     //req.user contains current signed in user from sessions cookie
     res.locals.user = req.user;

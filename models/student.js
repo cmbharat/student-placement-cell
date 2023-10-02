@@ -18,7 +18,7 @@ const studentSchema = new mongoose.Schema(
       trim: true,
       minlength: 1,
     },
-    Status: {
+    status: {
       type: String,
       default: "not placed",
       trim: true,
