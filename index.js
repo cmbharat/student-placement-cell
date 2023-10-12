@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require("express");
+const env = require("./config/environment");
 const cookieParser = require("cookie-parser");
 const port = 8000;
 const path = require("path");
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.urlencoded());
 app.use(cookieParser());
 
-app.use(express.static("./assets"));
+app.use(express.static(env.asset_path));
 app.use(expressLayouts);
 
 //extract style and scripts from sub pages into the layout
@@ -34,7 +36,7 @@ app.use(
     name: "codeial",
     //key to encode or decode the cookie
     //todo change the secret before the deployment in prod mode
-    secret: "something",
+    secret: env.session_cookie,
     //when session is not initialized since user has not yet logged in we don't want to store any data in session cookie
     saveUninitialized: false,
     //resave the data in session cookie even when the session cookie has not changed
