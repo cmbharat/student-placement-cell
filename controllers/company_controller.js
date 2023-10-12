@@ -41,7 +41,6 @@ module.exports.companydetails = async function (req, res) {
 
 module.exports.scheduleInterview = async function (req, res) {
   const { id, student_id, company, date } = req.body;
-  console.log("req.body===>", req.body);
   try {
     const existingCompany = await Company.findOne({ name: company });
     const obj = {

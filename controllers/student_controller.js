@@ -66,7 +66,6 @@ module.exports.studentInfo = async function (req, res) {
 };
 
 module.exports.updateStudent = async function (req, res) {
-  console.log("inside update", req.body);
   const {
     id,
     name,

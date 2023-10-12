@@ -10,7 +10,6 @@ passport.use(
     },
     async function (email, password, done) {
       const user = await User.findOne({ email: email });
-      console.log("user===>", user);
       if (!user) {
         return done(null, false);
       }

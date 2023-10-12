@@ -18,7 +18,6 @@ passport.use(
         email: profile.emails[0].value,
       });
 
-      console.log("profile====>", profile);
       if (user) {
         return done(null, user);
       } else {
