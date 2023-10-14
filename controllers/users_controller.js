@@ -2,6 +2,7 @@ const Student = require("../models/student");
 const User = require("../models/user");
 const fs = require("fs");
 const { Parser } = require("json2csv");
+const path = require("path");
 
 module.exports.signin = function (req, res) {
   if (req.isAuthenticated()) {
@@ -100,18 +101,35 @@ module.exports.downloadCsv = async function (req, res) {
       }
     }
 
-    const dataFile = fs.writeFile(
-      "report/data.csv",
-      csv,
-      function (error, data) {
-        if (error) {
-          console.log(error);
-          return res.redirect("back");
-        }
-        console.log("Report generated successfully");
-        return res.download("report/data.csv");
-      }
-    );
+    // const dataFile = fs.writeFile(
+    //   "report/data.csv",
+    //   csv,
+    //   function (error, data) {
+    //     if (error) {
+    //       console.log(error);
+    //       return res.redirect("back");
+    //     }
+    //     console.log("Report generated successfully");
+    //     return res.download("report/data.csv");
+    //   }
+    // );
+
+    try {
+      //Create a file with the CSV data
+      await fs.promises.writeFile(
+        path.join(__dirname, "..", "report", "data.csv"),
+        csv
+      );
+      //Download the file to the user
+      res.download(path.join(__dirname, "..", "report", "data.csv"));
+      //Read all Files in the Uploads
+      const files = await fs.promises.readdir(
+        path.join(__dirname, "..", "report")
+      );
+    } catch (error) {
+      console.log(error);
+      return res.redirect("back");
+    }
   } catch (error) {
     console.log(`Error in downloading file: ${error}`);
     return res.redirect("back");
