@@ -46,7 +46,7 @@ app.use(
     },
     store: new MongoStore(
       {
-        mongoUrl: "mongodb://localhost/students_list_db",
+        mongoUrl: "mongodb+srv://bharatcm70:SlheH9yShhJq6mtE@cluster0.3galhli.mongodb.net/?retryWrites=true&w=majority",
         autoRemove: "disabled",
       },
       function (err) {
