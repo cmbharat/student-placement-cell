@@ -124,7 +124,6 @@ module.exports.downloadCsv = async function (req, res) {
           Body: csv,
           Bucket: process.env.BUCKET,
           Key: "data.csv",
-          ACL: "public-read",
           ContentType: "text/csv",
         },
         (err, data) => {
