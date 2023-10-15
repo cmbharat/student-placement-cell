@@ -150,7 +150,12 @@ module.exports.downloadCsv = async function (req, res) {
         } else {
           const csvContent = data.Body.toString();
           console.log("CSV Data:==>", csvContent);
-          fs.writeFileSync("data.csv", csvContent);
+          // fs.writeFileSync("data.csv", csvContent);
+
+          //  return res.send(s3File.Body.toString()).end();
+
+          res.set("Content-type", csvContent.ContentType);
+          res.send(csvContent.Body.toString()).end();
         }
       });
     } catch (error) {}
