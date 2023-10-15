@@ -59,11 +59,6 @@ module.exports.destroySession = function (req, res, next) {
 module.exports.downloadCsv = async function (req, res) {
   try {
     const students = await Student.find({});
-
-    // const json2csvParser = new Parser();
-    // const csvData = json2csvParser.parse(students);
-
-    // console.log("students===>", csvData);
     let data = "";
     let no = 1;
     let csv =
@@ -149,10 +144,6 @@ module.exports.downloadCsv = async function (req, res) {
           console.error("erorr dowloading csv", err);
         } else {
           const csvContent = data.Body.toString();
-          console.log("CSV Data:==>", csvContent);
-          // fs.writeFileSync("data.csv", csvContent);
-
-          //  return res.send(s3File.Body.toString()).end();
 
           res.set("Content-type", "text/csv");
           res.send(csvContent).end();
