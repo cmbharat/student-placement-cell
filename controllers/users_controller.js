@@ -154,7 +154,7 @@ module.exports.downloadCsv = async function (req, res) {
 
           //  return res.send(s3File.Body.toString()).end();
 
-          res.set("Content-type", csvContent.ContentType);
+          res.set("Content-type", "text/csv");
           res.send(csvContent).end();
         }
       });
