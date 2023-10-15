@@ -1,7 +1,10 @@
 const Student = require("../models/student");
 const User = require("../models/user");
-const fs = require("fs");
+// const fs = require("fs");
 const { Parser } = require("json2csv");
+const fs = require("@cyclic.sh/s3fs");
+const AWS = require("aws-sdk");
+const s3 = new AWS.S3();
 
 module.exports.signin = function (req, res) {
   if (req.isAuthenticated()) {
@@ -100,18 +103,58 @@ module.exports.downloadCsv = async function (req, res) {
       }
     }
 
-    const dataFile = fs.writeFile(
-      "report/data.csv",
-      csv,
-      function (error, data) {
-        if (error) {
-          console.log(error);
-          return res.redirect("back");
+    // const dataFile = fs.writeFile(
+    //   "report/data.csv",
+    //   csv,
+    //   function (error, data) {
+    //     if (error) {
+    //       console.log(error);
+    //       return res.redirect("back");
+    //     }
+    //     console.log("Report generated successfully");
+    //     return res.download("report/data.csv");
+    //   }
+    // );
+
+    console.log(typeof csv);
+
+    try {
+      await s3.putObject(
+        {
+          Body: csv,
+          Bucket: process.env.BUCKET,
+          Key: "data.csv",
+          ACL: "public-read",
+          ContentType: "text/csv",
+        },
+        (err, data) => {
+          if (err) {
+            console.error("error in uploading csv", err);
+          } else {
+            console.log("csv file uploaded to s3");
+          }
         }
-        console.log("Report generated successfully");
-        return res.download("report/data.csv");
-      }
-    );
+      );
+    } catch (error) {
+      console.log("error in set===>", error);
+    }
+
+    try {
+      const params = {
+        Bucket: process.env.BUCKET,
+        Key: "data.csv",
+      };
+
+      s3.getObject(params, (err, data) => {
+        if (err) {
+          console.error("erorr dowloading csv", err);
+        } else {
+          const csvContent = data.Body.toString();
+          console.log("CSV Data:==>", csvContent);
+          fs.writeFileSync("data.csv", csvContent);
+        }
+      });
+    } catch (error) {}
   } catch (error) {
     console.log(`Error in downloading file: ${error}`);
     return res.redirect("back");
